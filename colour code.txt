@@ -1,0 +1,6 @@
+Yellow: button
+Red: Enemy
+Green: Tower
+Blue: Projectile
+
+Mouse: Black (Will not always show)

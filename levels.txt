@@ -1,0 +1,45 @@
+{
+1: {
+	'enemies':[
+	
+		# ('Name', scale, speed, amount, Time until first spawn, Time between spawns)
+		[
+		('walker', 1, 2, 10, 1, 0.5), 
+		],[
+		('sprinter', 1, 6, 10, 1, 0.2), 
+		],[ #####
+		('walker', 1, 4, 15, 0.5, 0.4),
+		('walker', 1, 4.5, 15, 0.5, 0.35),
+		('walker', 1, 5, 15, 0.5, 0.3),
+		('walker', 1, 5.5, 15, 0.5, 0.25),
+		('walker', 1, 6, 15, 0.5, 0.2)
+		]
+		],
+		
+	'start_money': 120,
+	'grid_size': (16, 7),
+	'background': (230, 230, 230),
+	
+},2: {
+	'enemies':[
+	
+		# ('Name', scale, speed, amount, Time until first spawn, Time between spawns)
+		[
+		
+		('walker', 1, 5, 15, 0, 0.3),
+		('walker', 1, 5, 15, 0, 0.2),
+		('walker', 1, 5, 15, 0, 0.15),
+		('walker', 1, 5, 15, 0, 0.1),
+		('walker', 1, 5, 15, 0, 0.075),
+		],[
+		('sprinter', 1, 15, 10, 0, 0.1),
+		('sprinter', 1, 13, 10, 0, 0.08),
+		]
+		],
+		
+	'start_money': 750,
+	'grid_size': (16, 7),
+	'background': (230, 230, 230),
+	},
+
+}
