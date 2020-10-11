@@ -26,7 +26,10 @@ class Vector2:
         return Vector2(self.x / other, self.y / other)
 
     def __str__(self):
-        return "Vector({}, {})".format(self.x, self.y)
+        return "Vec({}, {})".format(self.x, self.y)
+
+    def __repr__(self):
+        return self.__str__()
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y

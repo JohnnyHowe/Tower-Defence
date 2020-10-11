@@ -8,7 +8,7 @@ class Board:
     size = None
     items = None
 
-    def __init__(self, size=Vector2(10, 7)):
+    def __init__(self, size=Vector2(20, 10)):
         self.size = size
         self.initialize_board()
 
