@@ -48,4 +48,5 @@ Temporary Items
 
 .git
 ./idea
+.idea
 __pycache__
