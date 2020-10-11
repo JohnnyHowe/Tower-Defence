@@ -1,9 +1,11 @@
 import pygame
+
 from engine.display import Display
 from engine.event_handler import EventHandler
 from engine.vector2 import Vector2
-from board import Board
 
+import path_finder as PathFinder
+from board import Board
 from test_tower import TestTower
 
 
@@ -15,6 +17,7 @@ class Game:
         self.board = Board()
         EventHandler.add_listener(pygame.MOUSEMOTION, self.mouse_motion_listener)
         EventHandler.add_listener(pygame.MOUSEBUTTONUP, self.mouse_up_listener)
+        # EventHandler.add_listener(pygame.MOUSEBUTTONUP, self.show_path)
 
     def run_frame(self):
         EventHandler.run()
@@ -24,7 +27,16 @@ class Game:
         self.show_mouse_over_cell()
         self.board.show_towers()
 
+        self.show_path()
+
         pygame.display.update()
+
+    def show_path(self, *args):
+        """ Show the path line.
+        TODO """
+        path = PathFinder.get_path(self.board)
+        for cell in path:
+            pygame.draw.circle(Display.surface, (255, 255, 255), self.board.get_cell_center(cell).get_pygame_tuple(), 5)
 
     def show_mouse_over_cell(self, color=(255, 255, 0)):
         """ Highlight the mouse_cell if it exists. """

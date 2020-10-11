@@ -88,3 +88,8 @@ class Board:
         """ What's there? """
         return self.items[position.y][position.x]
 
+    def is_on_board(self, cell):
+        """ Is the cell a valid cell?
+        is it on the board? """
+        return 0 <= cell.x < self.size.x and 0 <= cell.y < self.size.y
+
