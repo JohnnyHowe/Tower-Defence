@@ -1,8 +1,7 @@
 import pygame
 from engine.display import Display
-from event_handler import EventHandler
+from engine.event_handler import EventHandler
 from engine.vector2 import Vector2
-from engine.rect import Rect
 from board import Board
 
 from test_tower import TestTower

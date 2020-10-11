@@ -80,7 +80,11 @@ class Board:
         cell_size = self.get_cell_size()
         return Rect(cell_pos.x, cell_pos.y, cell_size, cell_size)
 
-    def set_cell(self, obj, position):
+    def set_cell_contents(self, obj, position):
         """ Set the item in cell. """
         self.items[position.y][position.x] = obj
+
+    def get_cell_contents(self, position):
+        """ What's there? """
+        return self.items[position.y][position.x]
 
