@@ -42,9 +42,14 @@ class Game:
     def show_path(self):
         """ Show the path line
         As a bunch of dots """
-        for i, cell in enumerate(self.path):
-            color = (0, (i / len(self.path)) * 255, 0)
-            pygame.draw.circle(Display.surface, color, self.board.get_cell_center(cell).get_pygame_tuple(), 3)
+        # for i, cell in enumerate(self.path):
+            # color = (0, (i / len(self.path)) * 255, 0)
+            # pygame.draw.circle(Display.surface, color, self.board.get_cell_center(cell).get_pygame_tuple(), 3)
+        for i in range(len(self.path) - 1):
+            current = self.board.get_cell_center(self.path[i]).get_pygame_tuple()
+            next = self.board.get_cell_center(self.path[i + 1]).get_pygame_tuple()
+            pygame.draw.line(Display.surface, (255, 0, 0), current, next, int(self.board.get_cell_size() * 0.2))
+
 
     def show_mouse_over_cell(self, color=(255, 255, 0)):
         """ Highlight the mouse_cell if it exists. """
