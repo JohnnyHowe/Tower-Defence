@@ -6,7 +6,6 @@ from rect import Rect
 
 
 class Game:
-
     board = None
 
     def start(self):
@@ -16,12 +15,6 @@ class Game:
         EventHandler.run()
         Display.surface.fill((255, 255, 255))
         self.board.show()
-
-        # cell_size = self.board.get_cell_size()
-        # for x in range(self.board.size.x):
-        #     for y in range(self.board.size.y):
-        #         cell_pos = self.board.get_cell_position(Vector2(x, y))
-        #         pygame.draw.rect(Display.surface, (0, 0, 0), (cell_pos.x, cell_pos.y, cell_size * 0.9, cell_size * 0.9))
 
         pygame.display.update()
 
@@ -37,13 +30,24 @@ class Board:
     def initialize_board(self):
         items = []
         for y in range(self.size.y):
-            items.append([None,] * self.size.x)
+            items.append([None, ] * self.size.x)
 
     def show(self):
         self.show_background()
+        self.show_grid()
 
     def show_grid(self):
-        pass
+        cell_size = self.get_cell_size()
+        board_rect = self.get_board_rect()
+        offset = board_rect.get_top_left()
+        for x in range(self.size.x + 1):
+            pygame.draw.line(Display.surface, (0, 0, 0),
+                             (x * cell_size + offset.x, offset.y),
+                             (x * cell_size + offset.x, board_rect.h + offset.y))
+        for y in range(self.size.y + 1):
+            pygame.draw.line(Display.surface, (0, 0, 0),
+                             (offset.x, y * cell_size + offset.y),
+                             (offset.x + board_rect.w, y * cell_size + offset.y))
 
     def show_background(self):
         board_rect = self.get_board_rect()
@@ -61,4 +65,3 @@ class Board:
 
     def get_cell_size(self):
         return min(Display.size.x / self.size.x, Display.size.y / self.size.y)
-
