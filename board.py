@@ -50,7 +50,7 @@ class Board:
                              line_width)
 
     def show_background(self, color=(200, 200, 200)):
-        """ Show a solid color backdrop for the board"""
+        """ Show a solid color backdrop for the board """
         board_rect = self.get_board_rect()
         pygame.draw.rect(Display.surface, color, board_rect.get_pygame_tuple())
 

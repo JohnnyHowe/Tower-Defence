@@ -30,4 +30,4 @@ class Rect:
         return "Rect({}, {}, {}, {})".format(self.x, self.y, self.w, self.h)
 
     def get_pygame_tuple(self):
-        return self.x - self.w / 2, self.y - self.h / 2, self.w, self.h
+        return int(self.x - self.w / 2), int(self.y - self.h / 2), int(self.w), int(self.h)
