@@ -14,8 +14,8 @@ class Game:
 
     def start(self):
         self.board = Board()
-        # self.board.set_cell(TestTower(Vector2(0, 0)), Vector2(0, 0))
         EventHandler.add_listener(pygame.MOUSEMOTION, self.mouse_motion_listener)
+        EventHandler.add_listener(pygame.MOUSEBUTTONUP, self.mouse_up_listener)
 
     def run_frame(self):
         EventHandler.run()
@@ -41,3 +41,28 @@ class Game:
             self.mouse_cell = Vector2(int(mouse_pos.x), int(mouse_pos.y))
         else:
             self.mouse_cell = None
+
+    def mouse_up_listener(self, event):
+        """ When mouse 1 (left) is released, try make a tower.
+        When mouse 3 (right) is released, try remove a tower. """
+        if event.button == 1:
+            self.try_make_tower("HOES", self.mouse_cell)
+        elif event.button == 3:
+            self.sell_cell(self.mouse_cell)
+
+    def sell_cell(self, cell):
+        """ Clears the cell. Refunding the player the towers refund amount. """
+        # Refund player
+        self.board.set_cell(None, cell)
+
+    def try_make_tower(self, tower, position):
+        """ Try to make a tower at the position.
+        Checks:
+          - position (anything there? on board?)
+          - is the tower valid (not None?)
+        """
+        # Is this a valid position? (Anything there already?)
+        # Can the player afford this?
+        # Do it
+        self.board.set_cell(TestTower(position), position)
+
