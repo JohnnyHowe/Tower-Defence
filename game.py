@@ -52,7 +52,7 @@ class Game:
     def sell_cell(self, cell):
         """ Clears the cell. Refunding the player the towers refund amount. """
         # Refund player
-        self.board.set_cell(None, cell)
+        self.board.set_cell_contents(None, cell)
 
     def try_make_tower(self, tower, position):
         """ Try to make a tower at the position.
@@ -63,5 +63,5 @@ class Game:
         # Is this a valid position? (Anything there already?)
         # Can the player afford this?
         # Do it
-        self.board.set_cell(TestTower(position), position)
+        self.board.set_cell_contents(TestTower(position), position)
 
