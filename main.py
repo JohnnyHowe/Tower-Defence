@@ -1,6 +1,3 @@
-import pygame
-from display import Display
-from eventHandler import EventHandler
 from game import Game
 
 

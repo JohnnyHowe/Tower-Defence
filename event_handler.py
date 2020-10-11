@@ -1,12 +1,11 @@
 import pygame
-from display import Display
-from vector2 import Vector2
+from engine.display import Display
+from engine.vector2 import Vector2
 
 
 class _Handler:
-
-    def __init__(self):
-        pass
+    """ Should this be static?
+    Maybe even just a bunch of functions? """
 
     def run(self):
         events = pygame.event.get()

@@ -21,3 +21,7 @@ class Vector2:
 
     def __str__(self):
         return "Vector({}, {})".format(self.x, self.y)
+
+    @staticmethod
+    def one():
+        return Vector2(1, 1)
