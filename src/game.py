@@ -16,6 +16,7 @@ class Game:
     path = None     # What path will the enemies take?
 
     def start(self):
+        """ Start the game - set the board, path and listeners. """
         self.board = Board()
         EventHandler.add_listener(pygame.MOUSEMOTION, self.mouse_motion_listener)
         EventHandler.add_listener(pygame.MOUSEBUTTONUP, self.mouse_up_listener)
@@ -24,13 +25,13 @@ class Game:
         self.update_path()
 
     def run_frame(self):
+        """ Run one frame/game update. """
         EventHandler.run()
 
         Display.surface.fill((255, 255, 255))
         self.board.show_background()
         self.show_mouse_over_cell()
         self.board.show_towers()
-
         self.show_path()
 
         pygame.display.update()
@@ -42,9 +43,6 @@ class Game:
     def show_path(self):
         """ Show the path line
         As a bunch of dots """
-        # for i, cell in enumerate(self.path):
-            # color = (0, (i / len(self.path)) * 255, 0)
-            # pygame.draw.circle(Display.surface, color, self.board.get_cell_center(cell).get_pygame_tuple(), 3)
         for i in range(len(self.path) - 1):
             current = self.board.get_cell_center(self.path[i]).get_pygame_tuple()
             next = self.board.get_cell_center(self.path[i + 1]).get_pygame_tuple()
@@ -70,10 +68,12 @@ class Game:
         """ When mouse 1 (left) is released, try make a tower.
         When mouse 3 (right) is released, try remove a tower. """
         board_change = False
-        if event.button == 1:
-            board_change = self.try_make_tower("HOES", self.mouse_cell)
-        elif event.button == 3:
-            board_change = self.sell_cell(self.mouse_cell)
+        if self.mouse_cell:
+            if self.board.is_on_board(self.mouse_cell):
+                if event.button == 1:
+                    board_change = self.try_make_tower("HOES", self.mouse_cell)
+                elif event.button == 3:
+                    board_change = self.sell_cell(self.mouse_cell)
 
         if board_change:
             self.update_path()
@@ -103,5 +103,4 @@ class Game:
         if self.board.get_cell_contents(cell) is None:
             self.board.set_cell_contents(TestTower(cell), cell)
             return True
-        else:
-            return False
+        return False
