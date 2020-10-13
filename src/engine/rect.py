@@ -18,6 +18,7 @@ class Rect:
         w: width of rect
         h: height of rect
     """
+
     # pylint: disable=invalid-name
     # pylint: disable=missing-function-docstring
 
@@ -40,6 +41,28 @@ class Rect:
 
     def get_top_left(self):
         return Vector2(self.x - self.w / 2, self.y - self.h / 2)
+
+    def get_min_x(self):
+        return self.x - self.w / 2
+
+    def get_max_x(self):
+        return self.x + self.w / 2
+
+    def get_min_y(self):
+        return self.y - self.h / 2
+
+    def get_max_y(self):
+        return self.y + self.h / 2
+
+    def is_touching(self, vector):
+        """ Is the vector touching the rect?
+
+        Considered touching if.
+            rect left <= vector x <= rect right and
+            rect top <= vector y <= rect bottom (Coordinate system has y inverted)
+        """
+        return self.get_min_x() <= vector.x <= self.get_max_x() and \
+            self.get_min_y() <= vector.y <= self.get_max_y()
 
     def __mul__(self, other):
         return Rect(self.x * other, self.y * other, self.w * other, self.h * other)
