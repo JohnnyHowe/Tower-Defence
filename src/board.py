@@ -31,7 +31,7 @@ class Board:
         for row in self.items:
             for item in row:
                 if item:
-                    item.show(self)
+                    item.show()
 
     def show_grid(self, color=(0, 0, 0), line_width=1):
         """ Show grid lines over the board. """
