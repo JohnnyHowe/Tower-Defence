@@ -38,5 +38,9 @@ class Vector2:
         return int(self.x), int(self.y)
 
     @staticmethod
+    def component_mul(vec1, vec2):
+        return Vector2(vec1.x * vec2.x, vec1.y * vec2.y)
+
+    @staticmethod
     def one():
         return Vector2(1, 1)
