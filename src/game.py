@@ -3,20 +3,29 @@ import pygame
 from engine.display import Display
 from engine.event_handler import EventHandler
 from engine.vector2 import Vector2
+from engine.state_machine import StateMachine
 
 # import path_finder as PathFinder
 from path_finder import PathFinder
 from board import Board
 from test_tower import TestTower
+from projectile_manager import ProjectileManager
 
 
-class Game:
+class States:
+    setup = 0
+    in_play = 1
+
+
+class Game(StateMachine):
     board = None
     mouse_cell = None   # What cell is the mouse over?
     path = None     # What path will the enemies take?
+    state = None
 
     def start(self):
         """ Start the game - set the board, path and listeners. """
+        self.set_state(States.setup)
         self.board = Board()
         EventHandler.add_listener(pygame.MOUSEMOTION, self.mouse_motion_listener)
         EventHandler.add_listener(pygame.MOUSEBUTTONUP, self.mouse_up_listener)
@@ -27,12 +36,14 @@ class Game:
     def run_frame(self):
         """ Run one frame/game update. """
         EventHandler.run()
+        ProjectileManager.update()
 
         Display.surface.fill((255, 255, 255))
         self.board.show_background()
         self.show_mouse_over_cell()
         self.board.show_towers()
         self.show_path()
+        ProjectileManager.show_projectiles()
 
         pygame.display.update()
 
@@ -47,7 +58,6 @@ class Game:
             current = self.board.get_cell_center(self.path[i]).get_pygame_tuple()
             next = self.board.get_cell_center(self.path[i + 1]).get_pygame_tuple()
             pygame.draw.line(Display.surface, (255, 0, 0), current, next, int(self.board.get_cell_size() * 0.2))
-
 
     def show_mouse_over_cell(self, color=(255, 255, 0)):
         """ Highlight the mouse_cell if it exists. """
@@ -101,6 +111,6 @@ class Game:
         # Is this a valid position? (Anything there already?)
         # Can the player afford this?
         if self.board.get_cell_contents(cell) is None:
-            self.board.set_cell_contents(TestTower(cell), cell)
+            self.board.set_cell_contents(TestTower(cell, self.board), cell)
             return True
         return False
