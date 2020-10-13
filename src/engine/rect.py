@@ -1,9 +1,25 @@
+"""Module for handling rectangle info. Contains Rect class.
+
+See Rect (that's all this contains)
+"""
+# pylint: disable=import-error
 from engine.vector2 import Vector2
 
 
 class Rect:
-    """ Rect object
-    x and y ordinates are of the center. """
+    """Rect representation.
+
+    class stores each component as an attribute, rather than position and size.
+    Position of rect (x and y attributes) describe the center of the rect.
+
+    Attributes:
+        x: x ordinate of center of rect.
+        y: y ordinate of center of rect.
+        w: width of rect
+        h: height of rect
+    """
+    # pylint: disable=invalid-name
+    # pylint: disable=missing-function-docstring
 
     def __init__(self, x=0, y=0, w=0, h=0):
         self.x = x
@@ -11,7 +27,7 @@ class Rect:
         self.w = w
         self.h = h
 
-    def set_center(self, center_vector):
+    def set_position(self, center_vector):
         self.x = center_vector.x
         self.y = center_vector.y
 
@@ -19,7 +35,7 @@ class Rect:
         self.w = size_vector.x
         self.h = size_vector.y
 
-    def get_center(self):
+    def get_position(self):
         return Vector2(self.x, self.y)
 
     def get_top_left(self):
