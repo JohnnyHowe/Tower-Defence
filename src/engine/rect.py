@@ -5,11 +5,19 @@ class Rect:
     """ Rect object
     x and y ordinates are of the center. """
 
-    def __init__(self, x, y, w, h):
+    def __init__(self, x=0, y=0, w=0, h=0):
         self.x = x
         self.y = y
         self.w = w
         self.h = h
+
+    def set_center(self, center_vector):
+        self.x = center_vector.x
+        self.y = center_vector.y
+
+    def set_size(self, size_vector):
+        self.w = size_vector.x
+        self.h = size_vector.y
 
     def get_center(self):
         return Vector2(self.x, self.y)
