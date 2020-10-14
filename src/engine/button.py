@@ -39,10 +39,11 @@ class Button(UIElement):
     hovered_color = (150, 150, 150)
     pressed_color = (170, 255, 170)
 
-    def __init__(self, anchor_point, size,
+    def __init__(self, anchor_point, size, offset=Vector2(0, 0),
                  anchor_mode=Vector2(PositionModes.relative, PositionModes.relative),
-                 size_mode=Vector2(SizeModes.relative, SizeModes.relative)):
-        super().__init__(anchor_point, size, anchor_mode, size_mode)
+                 size_mode=Vector2(SizeModes.relative, SizeModes.relative),
+                 offset_mode=Vector2(PositionModes.relative, PositionModes.relative)):
+        super().__init__(anchor_point, size, offset, anchor_mode, size_mode, offset_mode)
 
         # pylint: disable=no-member
         EventHandler.add_listener(pygame.MOUSEMOTION, self.on_mouse_move)
