@@ -42,6 +42,15 @@ class Rect:
     def get_top_left(self):
         return Vector2(self.x - self.w / 2, self.y - self.h / 2)
 
+    def get_top_right(self):
+        return Vector2(self.x + self.w / 2, self.y - self.h / 2)
+
+    def get_bottom_left(self):
+        return Vector2(self.x - self.w / 2, self.y + self.h / 2)
+
+    def get_bottom_right(self):
+        return Vector2(self.x + self.w / 2, self.y + self.h / 2)
+
     def get_min_x(self):
         return self.x - self.w / 2
 
