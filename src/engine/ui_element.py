@@ -18,6 +18,7 @@ how to scale and position itself.
         foo.show()
         ...
 """
+# pylint: disable=import-error
 from enum import Enum
 
 import pygame
@@ -61,6 +62,8 @@ class UIElement:
         size: size Vector2. How this scales is defined by size_mode.
         size_mode: Vector2 on how to treat size. See SizeModes.
     """
+    # pylint: disable=too-few-public-methods
+
     anchor_point = None
     anchor_mode = None
 
