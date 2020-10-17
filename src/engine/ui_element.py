@@ -64,6 +64,8 @@ class UIElement:
         scale_mode: how to treat the rect. eg, relative, absolute positioning? See ScaleModes
         offset: Rect on how much to offset the rect.
         offset_mode: Rect on how to treat offset. See ScaleModes
+        parent: the parent object of the element. Allows the element to be scaled/positioned
+            relative to the parent.
     """
     # pylint: disable=too-few-public-methods
 
@@ -73,6 +75,9 @@ class UIElement:
     offset = None
     offset_mode = None
 
+    parent = None
+    inherit = Rect(True, True, True, True)
+
     _last_display_rect = None  # rect in pixels that the element took up last time it was shown
 
     def __init__(self, rect,
@@ -80,7 +85,8 @@ class UIElement:
                                  ScaleModes.absolute, ScaleModes.absolute),
                  offset=Rect(),
                  offset_mode=Rect(ScaleModes.relative, ScaleModes.relative,
-                                  ScaleModes.relative, ScaleModes.relative)):
+                                  ScaleModes.relative, ScaleModes.relative),
+                 ):
         """Initializes the UIElement with the given parameters.
         See class doc for attribute definitions.
         If no anchor_mode or size_mode is given, they are assumed to be relative.
@@ -96,6 +102,10 @@ class UIElement:
     def init(self):
         """ Called by __init__ so you don't need to copy all the parameters again.
         Override this to add things to __init__. """
+
+    # ==================================================
+    # Display-ers
+    # ==================================================
 
     def show_area(self, color=(0, 0, 216)):
         """Show the area the element takes up as a solid color rectangle."""
@@ -124,9 +134,28 @@ class UIElement:
                          offset.get_pygame_tuple(),
                          width)
 
+    # ==================================================
+    # Display helpers
+    # ==================================================
+
     def get_final_rect(self):
         """Get the position center position of the element the display (in pixels)."""
-        return self.get_scaled_rect() + self.get_scaled_offset()
+        return self.get_scaled_rect() + self.get_scaled_offset() + self.get_parent_offset()
+
+    def get_parent_offset(self):
+        """How much does the parent offset the final rect?"""
+        rect = Rect()
+        if self.parent:
+            parent_rect = self.parent.get_final_rect()
+            if self.inherit.x:
+                rect.x = parent_rect.x
+            if self.inherit.y:
+                rect.y = parent_rect.y
+            if self.inherit.w:
+                rect.w = parent_rect.w
+            if self.inherit.h:
+                rect.h = parent_rect.h
+        return rect
 
     def get_scaled_rect(self):
         """ Scale up the rect according to scale_mode. """
