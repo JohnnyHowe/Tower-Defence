@@ -15,6 +15,8 @@ from board import Board
 from test_tower import TestTower
 from projectile_manager import ProjectileManager
 from tower_selector import TowerSelector
+from test_tower import TestTower
+from tower import Tower
 
 
 class States(Enum):
@@ -23,8 +25,8 @@ class States(Enum):
 
 
 class Game(StateMachine):
-    mouse_cell = None   # What cell is the mouse over?
-    path = None     # What path will the enemies take?
+    mouse_cell = None  # What cell is the mouse over?
+    path = None  # What path will the enemies take?
     state = None
 
     # Tower selector UI styles - should make a css kinda thing?
@@ -69,10 +71,12 @@ class Game(StateMachine):
     def start(self):
         """ Start the game - set the board, path and listeners. """
         self.set_state(States.setup)
-        self.tower_selector = TowerSelector(self.max_tower_selector_rect,
-                                            self.tower_selector_scale_mode,
-                                            self.tower_selector_offset,
-                                            self.tower_selector_offset_mode)
+        self.tower_selector = TowerSelector(
+            [Tower, TestTower],
+            self.max_tower_selector_rect,
+            self.tower_selector_scale_mode,
+            self.tower_selector_offset,
+            self.tower_selector_offset_mode)
         self.board = Board(self.max_board_rect,
                            self.board_rect_scale_mode,
                            self.board_rect_offset,
@@ -94,10 +98,8 @@ class Game(StateMachine):
         self.show_mouse_over_cell()
         ProjectileManager.show_projectiles()
 
-        self.tower_selector.show()
-
         self.board.show()
-        # self.board.show_area(color=(0, 255, 0))
+        self.tower_selector.show()
 
         pygame.display.update()
 

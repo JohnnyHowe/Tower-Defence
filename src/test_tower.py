@@ -12,6 +12,9 @@ from projectile_manager import ProjectileManager
 
 class TestTower(Tower):
 
+    name = "Test Tower"
+    icon_path = "images/TestTower.png"
+
     def __init__(self, position, board):
         super().__init__(position, board)
         # EventHandler.add_listener(pygame.MOUSEBUTTONUP, lambda x: self.shoot())
