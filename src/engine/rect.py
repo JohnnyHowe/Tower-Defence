@@ -73,6 +73,9 @@ class Rect:
         return self.get_min_x() <= vector.x <= self.get_max_x() and \
             self.get_min_y() <= vector.y <= self.get_max_y()
 
+    def get_copy(self):
+        return Rect(self.x, self.y, self.w, self.h)
+
     def __mul__(self, other):
         return Rect(self.x * other, self.y * other, self.w * other, self.h * other)
 
