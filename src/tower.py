@@ -4,6 +4,9 @@ from engine.display import Display
 
 class Tower:
 
+    name = "Unnamed Tower"
+    icon_path = "images/missing.png"
+
     position = None
     board = None
 
