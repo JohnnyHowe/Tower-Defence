@@ -13,7 +13,7 @@
 # pylint: disable=import-error
 import pygame
 
-from engine.ui_element import UIElement, PositionModes, SizeModes
+from engine.ui_element import UIElement, ScaleModes
 from engine.vector2 import Vector2
 from engine.event_handler import EventHandler
 
@@ -39,12 +39,7 @@ class Button(UIElement):
     hovered_color = (150, 150, 150)
     pressed_color = (170, 255, 170)
 
-    def __init__(self, anchor_point, size, offset=Vector2(0, 0),
-                 anchor_mode=Vector2(PositionModes.relative, PositionModes.relative),
-                 size_mode=Vector2(SizeModes.relative, SizeModes.relative),
-                 offset_mode=Vector2(PositionModes.relative, PositionModes.relative)):
-        super().__init__(anchor_point, size, offset, anchor_mode, size_mode, offset_mode)
-
+    def init(self):
         # pylint: disable=no-member
         EventHandler.add_listener(pygame.MOUSEMOTION, self.on_mouse_move)
         EventHandler.add_listener(pygame.MOUSEBUTTONDOWN, self.on_mouse_down)
@@ -61,7 +56,7 @@ class Button(UIElement):
         If mouse_over is set to false, also set mouse_down to False
         """
         mouse_pos = Vector2(event.pos[0], event.pos[1])
-        if self._last_display_rect:     # When app first opened, this may not exist
+        if self._last_display_rect:  # When app first opened, this may not exist
             self.mouse_over = self._last_display_rect.is_touching(mouse_pos)
             if not self.mouse_over:
                 self.mouse_down = False

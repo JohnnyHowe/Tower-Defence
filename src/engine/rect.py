@@ -39,6 +39,9 @@ class Rect:
     def get_position(self):
         return Vector2(self.x, self.y)
 
+    def get_size(self):
+        return Vector2(self.w, self.h)
+
     def get_top_left(self):
         return Vector2(self.x - self.w / 2, self.y - self.h / 2)
 
@@ -51,16 +54,16 @@ class Rect:
     def get_bottom_right(self):
         return Vector2(self.x + self.w / 2, self.y + self.h / 2)
 
-    def get_min_x(self):
+    def get_left(self):
         return self.x - self.w / 2
 
-    def get_max_x(self):
+    def get_right(self):
         return self.x + self.w / 2
 
-    def get_min_y(self):
+    def get_bottom(self):
         return self.y - self.h / 2
 
-    def get_max_y(self):
+    def get_top(self):
         return self.y + self.h / 2
 
     def is_touching(self, vector):
@@ -70,8 +73,8 @@ class Rect:
             rect left <= vector x <= rect right and
             rect top <= vector y <= rect bottom (Coordinate system has y inverted)
         """
-        return self.get_min_x() <= vector.x <= self.get_max_x() and \
-            self.get_min_y() <= vector.y <= self.get_max_y()
+        return self.get_left() <= vector.x <= self.get_right() and \
+            self.get_bottom() <= vector.y <= self.get_top()
 
     def get_copy(self):
         return Rect(self.x, self.y, self.w, self.h)
