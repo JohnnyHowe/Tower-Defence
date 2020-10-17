@@ -8,7 +8,7 @@ class _Display:
     size = None
 
     def __init__(self):
-        self.resize(Vector2(600, 400))
+        self.resize(Vector2(800, 400))
 
     def resize(self, new_size):
         self.size = new_size

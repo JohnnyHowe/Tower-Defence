@@ -11,8 +11,9 @@ class Tower:
         self.position = position
         self.board = board
 
-    def show(self):
-        pygame.draw.rect(Display.surface, (0, 0, 255), self.board.get_cell_rect(self.position).get_pygame_tuple())
+    def show(self, cell_rect):
+        # pygame.draw.rect(Display.surface, (0, 0, 255), self.board.get_cell_rect(self.position).get_pygame_tuple())
+        pygame.draw.rect(Display.surface, (0, 0, 255), cell_rect.get_pygame_tuple())
 
     def update(self):
         pass
